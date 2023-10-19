@@ -1,0 +1,12 @@
+.bold-header {
+  font-weight: bold;
+  /* background-color: #aed2ff; */
+  border: 1px solid blue;
+}
+
+.table-container {
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+  max-width: 1280px;
+}

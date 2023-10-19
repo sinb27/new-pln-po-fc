@@ -1,0 +1,16 @@
+.po-container {
+  /* margin-top: -10rem; */
+  position: absolute;
+  top: 3rem;
+  left: 5rem;
+  max-width: 1440px;
+}
+
+@media screen and (max-width: 1440px) {
+  .po-container {
+    position: absolute;
+    top: 3rem;
+    left: 5rem;
+    max-width: 1280px;
+  }
+}
