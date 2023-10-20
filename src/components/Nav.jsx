@@ -19,9 +19,10 @@ import MenuList from "./MenuList";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+// import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
 // import Nav from "../components/Nav";
 // import AnalyticEcommerce from "./components/cards/statistics/AnalyticEcommerce";DataChartPage
 
@@ -219,7 +220,11 @@ export default function Nav() {
               aria-label="menu"
               sx={{ flexGrow: 1 }}
             />
-            <AccountCircleOutlinedIcon sx={{ m: 1 }} />
+            <Avatar
+              sx={{ m: 1 }}
+              alt={userName ? `${userName}` : ""}
+              src="/broken-image.jpg"
+            />
             <Typography variant="p" sx={{ mr: 2, fontWeight: "Bold" }}>
               User :{" "}
               {userName && userSurname

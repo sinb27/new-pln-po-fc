@@ -20,8 +20,9 @@ import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 // import { isNull } from "lodash";
 import Nav from "../components/Nav";
-import "./Planning_Forecast_POPage.css";
+import "./styles/Planning_Forecast_POPage.css";
 import Container from "@mui/material/Container";
+
 // import { Container } from "@mui/material";
 
 export default function Planning_Forecast_POPage({ onSearch }) {
@@ -797,7 +798,7 @@ export default function Planning_Forecast_POPage({ onSearch }) {
     { field: "unit", headerName: "Unit", width: 200 },
     { field: "process", headerName: "Process", width: 200 },
     { field: "qty_wip_detail", headerName: "Net Qty WIP Detail", width: 200 },
-    { field: "ro_rev", headerName: "RO Rev.", width: 150 },
+    { field: "std_day", headerName: "Remain to WH(Days)", width: 150 },
   ];
 
   let result_1 = sumQtyBal;
@@ -818,6 +819,7 @@ export default function Planning_Forecast_POPage({ onSearch }) {
         <Container maxWidth="lg">
           <Box>
             <Nav />
+            {/* style={{ display: 'flex', flexDirection: 'row' }} */}
             <div>
               <SearchFacSeriesProd_Fc
                 onSearch={(queryParams) => {
@@ -858,7 +860,7 @@ export default function Planning_Forecast_POPage({ onSearch }) {
 
             <div
               className="table-responsive table-fullscreen"
-              style={{ width: "100%", marginTop: "5px" }}
+              style={{ height: 800, width: "100%", marginTop: "5px" }}
             >
               {isLoading ? ( // Render the loading indicator if isLoading is true
                 <div
@@ -970,7 +972,12 @@ export default function Planning_Forecast_POPage({ onSearch }) {
                   <tbody>
                     {Object.values(dataByProduct).map((productData, index) => (
                       <tr key={productData.pfd_period_no}>
-                        <td style={{ textAlign: "center", fontWeight: "bold" }}>
+                        <td
+                          style={{
+                            textAlign: "center",
+                            fontWeight: "bold",
+                          }}
+                        >
                           {productData.pfd_period_no}
                         </td>
                         {wk_no.map((week, weekIndex) => {
@@ -1772,7 +1779,7 @@ export default function Planning_Forecast_POPage({ onSearch }) {
                   <Box
                     sx={{
                       ...style_Modal,
-                      width: 1500,
+                      width: 1490,
                       height: 800,
                       backgroundColor: "#AED2FF",
                     }}

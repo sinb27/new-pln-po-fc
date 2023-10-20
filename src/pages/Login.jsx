@@ -3,7 +3,7 @@ import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import Fuji from "/Fuji.png";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import "./Login.css";
+import "./styles/Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";

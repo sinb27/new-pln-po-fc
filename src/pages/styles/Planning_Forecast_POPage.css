@@ -6,6 +6,9 @@
   /* max-width: 1440px; */
   margin-right: 3rem;
   height: auto;
+  display: flex;
+  flex-direction: row;
+  color: black;
 }
 
 @media screen and (max-width: 1440px) {

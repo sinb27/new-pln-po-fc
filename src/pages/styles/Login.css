@@ -5,13 +5,14 @@
 }
 
 .login-logo {
-  transform: translate(4rem, -8px);
+  transform: translate(4.5rem, -8px);
 }
 
 .login-title {
-  color: rgb(0, 0, 0);
+  color: rgb(0, 2, 15);
   margin: 0;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
   font-weight: bold;
+  text-shadow: 3px 3px 6px #e0f5fffe;
 }

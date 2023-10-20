@@ -6,7 +6,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 // import { randomTraderName, randomEmail } from '@mui/x-data-grid-generator';
 // import FormControlLabel from '@mui/material/FormControlLabel';
 // import Switch from '@mui/material/Switch';
-import "./Planning_Forecast_AnalysisPage.css"; // Import the CSS file
+import "./styles/Planning_Forecast_AnalysisPage.css";
 import CircularProgress from "@mui/material/CircularProgress";
 // import { Axios } from "axios";
 import axios from "axios";
@@ -31,6 +31,14 @@ const columns = [
     headerName: "Product Name",
     width: 150,
     headerAlign: "center",
+    headerClassName: "bold-header",
+  },
+  {
+    field: "input_factory",
+    headerName: "Input Factory",
+    width: 100,
+    headerAlign: "center",
+    align: "center",
     headerClassName: "bold-header",
   },
   {
@@ -393,7 +401,7 @@ export default function Planning_Forecast_AnalysisPage({ onSearch }) {
         <Nav />
         <div
           className="table-container"
-          // style={{ width: "100%", marginTop: "5px" }}
+          // style={{ height: 800, width: "2055px", marginTop: "5px" }}
         >
           {isLoading ? ( // Render the loading indicator if isLoading is true
             <div
