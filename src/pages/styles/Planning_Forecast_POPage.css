@@ -14,6 +14,7 @@
 .table-responsive_table-fullscreen {
   width: max-content;
   margin: 1rem 0;
+  height: auto;
 }
 
 @media screen and (max-width: 1600px) {

@@ -10,11 +10,10 @@ import {
 } from "@mui/x-data-grid";
 import MenuItem from "@mui/material/MenuItem";
 import { useState, useEffect } from "react";
-import { FaTrash } from "react-icons/fa";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
+// import { FaTrash } from "react-icons/fa";
+// import AcUnitIcon from "@mui/icons-material/AcUnit";
 import ConnectedTvTwoToneIcon from "@mui/icons-material/ConnectedTvTwoTone";
 import LaptopTwoToneIcon from "@mui/icons-material/LaptopTwoTone";
-import Nav from "../components/Nav";
 
 const getJson = (apiRef) => {
   // Select rows and columns
@@ -198,7 +197,6 @@ export default function DataGridPage() {
 
   return (
     <>
-      <Nav />
       <div style={{ height: 800, width: "100%" }}>
         <DataGrid
           // {...data}

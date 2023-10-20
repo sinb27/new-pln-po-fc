@@ -18,8 +18,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import axios from "axios";
 
-import Nav from "../components/Nav";
-
 const columns = [
   {
     field: "sales",
@@ -246,7 +244,6 @@ export default function Planning_Forecast_AnalysisPage({ onSearch }) {
 
   return (
     <>
-      <Nav />
       <div
         className="table-responsive table-fullscreen"
         style={{ height: 800, width: "1550px", marginTop: "5px" }}
