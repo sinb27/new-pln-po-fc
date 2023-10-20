@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import WaterfallChartRoundedIcon from "@mui/icons-material/WaterfallChartRounded";
 import StackedLineChartOutlinedIcon from "@mui/icons-material/StackedLineChartOutlined";
 // count usage function
-import countUsage from "../components/catchCount/CountUsage.jsx";
+import countUsageAnalysis from "./catchCount/CountUsageAnalysis.jsx";
 
 const MenuList = () => {
   return (
@@ -81,7 +81,7 @@ const MenuList = () => {
       </ListItem>
       <ListItem
         // set onclick to send count data to the server
-        onClick={countUsage}
+        onClick={countUsageAnalysis}
         disablePadding
         sx={{ display: "block", color: "black" }}
         component={Link}

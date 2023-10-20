@@ -8,5 +8,36 @@
   position: absolute;
   top: 5rem;
   left: 5rem;
-  max-width: 1280px;
+  width: 1440px;
+  height: auto;
+}
+
+@media screen and (max-width: 1440px) {
+  .table-container {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: 1280px;
+    /* height: auto; */
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .table-container {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: 1080px;
+    /* height: auto; */
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .table-container {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: 720px;
+    /* height: auto; */
+  }
 }

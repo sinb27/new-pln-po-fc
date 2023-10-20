@@ -21,6 +21,7 @@ import axios from "axios";
 // import { isNull } from "lodash";
 import Nav from "../components/Nav";
 import "./Planning_Forecast_POPage.css";
+import Container from "@mui/material/Container";
 // import { Container } from "@mui/material";
 
 export default function Planning_Forecast_POPage({ onSearch }) {
@@ -814,32 +815,20 @@ export default function Planning_Forecast_POPage({ onSearch }) {
   return (
     <>
       <div className="po-container">
-        <Box>
-          <Nav />
-          <div>
-            <SearchFacSeriesProd_Fc
-              onSearch={(queryParams) => {
-                setSelectedProduct(queryParams.prd_name);
-                setSelectedSeries(queryParams.prd_series);
-                // fetchData_PDshow();
-              }}
-            />
-            <div id="pdShowLabel" style={{ width: "100%" }}>
-              {selectedProduct === "Product" ? (
-                <div
-                  style={{
-                    backgroundColor: "#E4F1FF",
-                    fontSize: "14px",
-                    fontFamily: "Angsana News, sans-serif",
-                    color: "#952323",
-                  }}
-                >
-                  {selectedSeries}
-                </div> // Render an empty div if selectedProduct is "Empty"
-              ) : (
-                chunkArray(fetchedProductData, 10).map((chunk, index) => (
+        <Container maxWidth="lg">
+          <Box>
+            <Nav />
+            <div>
+              <SearchFacSeriesProd_Fc
+                onSearch={(queryParams) => {
+                  setSelectedProduct(queryParams.prd_name);
+                  setSelectedSeries(queryParams.prd_series);
+                  // fetchData_PDshow();
+                }}
+              />
+              <div id="pdShowLabel" style={{ width: "100%" }}>
+                {selectedProduct === "Product" ? (
                   <div
-                    key={index}
                     style={{
                       backgroundColor: "#E4F1FF",
                       fontSize: "14px",
@@ -847,545 +836,515 @@ export default function Planning_Forecast_POPage({ onSearch }) {
                       color: "#952323",
                     }}
                   >
-                    {chunk.join(" ::: ")}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-
-          <div
-            className="table-responsive table-fullscreen"
-            style={{ width: "100%", marginTop: "5px" }}
-          >
-            {isLoading ? ( // Render the loading indicator if isLoading is true
-              <div
-                className="loading-indicator"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "50vh",
-                }}
-              >
-                <CircularProgress />{" "}
-                {/* Use the appropriate CircularProgress component */}
-                <p>Loading data...</p>
-                {/* <p>Loading data...{Math.round(loadingPercentage)}%</p> */}
+                    {selectedSeries}
+                  </div> // Render an empty div if selectedProduct is "Empty"
+                ) : (
+                  chunkArray(fetchedProductData, 10).map((chunk, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        backgroundColor: "#E4F1FF",
+                        fontSize: "14px",
+                        fontFamily: "Angsana News, sans-serif",
+                        color: "#952323",
+                      }}
+                    >
+                      {chunk.join(" ::: ")}
+                    </div>
+                  ))
+                )}
               </div>
-            ) : (
-              <table
-                className="table table-striped table-bordered table-hover blue-theme small"
-                style={{
-                  fontSize: "11px",
-                  fontFamily: "Arial, Helvetica, sans-serif",
-                }}
-              >
-                <thead
-                  className="thead-dark"
-                  style={{ position: "sticky", top: "0", zIndex: "1" }}
+            </div>
+
+            <div
+              className="table-responsive table-fullscreen"
+              style={{ width: "100%", marginTop: "5px" }}
+            >
+              {isLoading ? ( // Render the loading indicator if isLoading is true
+                <div
+                  className="loading-indicator"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "50vh",
+                  }}
                 >
-                  {/* className="table table-hover blue-theme table-very-small" */}
-                  <tr>
-                    {/* <th>Row No</th> */}
-                    <th
-                      style={{
-                        textAlign: "center",
-                        backgroundColor: "#AED2FF",
-                        height: "40px",
-                        width: "110px",
-                      }}
-                    >
-                      Week
-                    </th>
-                    {wk_no.map((week, index) => {
-                      let backgroundColor = "";
-                      let fontColor = "";
+                  <CircularProgress />{" "}
+                  {/* Use the appropriate CircularProgress component */}
+                  <p>Loading data...</p>
+                  {/* <p>Loading data...{Math.round(loadingPercentage)}%</p> */}
+                </div>
+              ) : (
+                <table
+                  className="table table-striped table-bordered table-hover blue-theme small"
+                  style={{
+                    fontSize: "11px",
+                    fontFamily: "Arial, Helvetica, sans-serif",
+                  }}
+                >
+                  <thead
+                    className="thead-dark"
+                    style={{ position: "sticky", top: "0", zIndex: "1" }}
+                  >
+                    {/* className="table table-hover blue-theme table-very-small" */}
+                    <tr>
+                      {/* <th>Row No</th> */}
+                      <th
+                        style={{
+                          textAlign: "center",
+                          backgroundColor: "#AED2FF",
+                          height: "40px",
+                          width: "110px",
+                        }}
+                      >
+                        Week
+                      </th>
+                      {wk_no.map((week, index) => {
+                        let backgroundColor = "";
+                        let fontColor = "";
 
-                      if (index < 12) {
-                        backgroundColor = "#E4F1FF";
-                      } else if (index > 12) {
-                        backgroundColor = "#E4F1FF";
-                      } else {
-                        (backgroundColor = "#279EFF"), (fontColor = "#F3FDE8");
-                      }
+                        if (index < 12) {
+                          backgroundColor = "#E4F1FF";
+                        } else if (index > 12) {
+                          backgroundColor = "#E4F1FF";
+                        } else {
+                          (backgroundColor = "#279EFF"),
+                            (fontColor = "#F3FDE8");
+                        }
 
-                      return (
-                        <th
-                          key={index}
-                          style={{
-                            backgroundColor: backgroundColor,
-                            color: fontColor,
-                            textAlign: "center",
-                            width: "60px",
-                          }}
-                        >
-                          {week}
-                        </th>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    <th
-                      style={{
-                        textAlign: "center",
-                        backgroundColor: "#AED2FF",
-                        height: "40px",
-                      }}
-                    >
-                      Period No. / Date
-                    </th>
-                    {monDate.map((date, index) => {
-                      let backgroundColor = "";
-                      let fontColor = "";
+                        return (
+                          <th
+                            key={index}
+                            style={{
+                              backgroundColor: backgroundColor,
+                              color: fontColor,
+                              textAlign: "center",
+                              width: "60px",
+                            }}
+                          >
+                            {week}
+                          </th>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      <th
+                        style={{
+                          textAlign: "center",
+                          backgroundColor: "#AED2FF",
+                          height: "40px",
+                        }}
+                      >
+                        Period No. / Date
+                      </th>
+                      {monDate.map((date, index) => {
+                        let backgroundColor = "";
+                        let fontColor = "";
 
-                      if (index < 12) {
-                        backgroundColor = "#E4F1FF";
-                      } else if (index > 12) {
-                        backgroundColor = "#E4F1FF";
-                      } else {
-                        (backgroundColor = "#279EFF"), (fontColor = "#F3FDE8");
-                      }
+                        if (index < 12) {
+                          backgroundColor = "#E4F1FF";
+                        } else if (index > 12) {
+                          backgroundColor = "#E4F1FF";
+                        } else {
+                          (backgroundColor = "#279EFF"),
+                            (fontColor = "#F3FDE8");
+                        }
 
-                      return (
-                        <th
-                          key={index}
-                          style={{
-                            backgroundColor: backgroundColor,
-                            color: fontColor,
-                            textAlign: "center",
-                          }}
-                        >
-                          {date}
-                        </th>
-                      );
-                    })}
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.values(dataByProduct).map((productData, index) => (
-                    <tr key={productData.pfd_period_no}>
-                      <td style={{ textAlign: "center", fontWeight: "bold" }}>
-                        {productData.pfd_period_no}
+                        return (
+                          <th
+                            key={index}
+                            style={{
+                              backgroundColor: backgroundColor,
+                              color: fontColor,
+                              textAlign: "center",
+                            }}
+                          >
+                            {date}
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.values(dataByProduct).map((productData, index) => (
+                      <tr key={productData.pfd_period_no}>
+                        <td style={{ textAlign: "center", fontWeight: "bold" }}>
+                          {productData.pfd_period_no}
+                        </td>
+                        {wk_no.map((week, weekIndex) => {
+                          let backgroundColor = "white"; // Default background color
+                          let fontColor_wk = "";
+                          const Period4Chars =
+                            productData.pfd_period_no.slice(-4);
+                          const Week4Chars = week.slice(-4);
+
+                          if (weekIndex === 12) {
+                            backgroundColor = "#CEE6F3";
+                            fontColor_wk = "#0E21A0";
+                          } else if (Period4Chars === Week4Chars) {
+                            backgroundColor = "#B9B4C7"; // Set background color to your desired color if weekIndex is 12
+                          }
+
+                          const totalRows = Object.values(dataByProduct).length;
+                          // let previousResult = 0;
+                          let qtyFc =
+                            productData.qty_fc[week] !== undefined
+                              ? productData.qty_fc[week]
+                              : 0;
+                          // let result = productData.qty_fc[week] !== undefined ? sumQtyBal - productData.qty_fc[week] : 0;
+                          if (index === totalRows - 1) {
+                            // Apply conditions only to the last row
+                            if (weekIndex === 12) {
+                              result_1 = result_1 - qtyFc;
+                              if (result_1 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_1 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+                            if (weekIndex === 13) {
+                              result_2 = result_1 - qtyFc;
+                              if (result_2 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_2 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 14) {
+                              result_3 = result_2 - qtyFc;
+                              if (result_3 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_3 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 15) {
+                              result_4 = result_3 - qtyFc;
+                              if (result_4 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_4 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 16) {
+                              result_5 = result_4 - qtyFc;
+                              if (result_5 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_5 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 17) {
+                              result_6 = result_5 - qtyFc;
+                              if (result_6 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_6 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 18) {
+                              result_7 = result_6 - qtyFc;
+                              if (result_7 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_7 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 19) {
+                              result_8 = result_7 - qtyFc;
+                              if (result_8 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_8 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 20) {
+                              result_9 = result_8 - qtyFc;
+                              if (result_9 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_9 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 21) {
+                              result_10 = result_9 - qtyFc;
+                              if (result_10 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_10 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+
+                            if (weekIndex === 22) {
+                              result_11 = result_10 - qtyFc;
+                              if (result_11 >= 0) {
+                                backgroundColor = "#A6FF96";
+                              } else if (result_11 < 0) {
+                                backgroundColor = "#EF9595";
+                              }
+                            }
+                          }
+
+                          return (
+                            <td
+                              key={weekIndex}
+                              style={{
+                                textAlign: "center",
+                                backgroundColor: backgroundColor,
+                                color: fontColor_wk,
+                                height: "30px",
+                              }}
+                            >
+                              {productData.qty_fc[week] !== undefined
+                                ? formatNumberWithCommas(
+                                    productData.qty_fc[week]
+                                  )
+                                : "0"}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                    <tr>
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        FC_Latest :
                       </td>
                       {wk_no.map((week, weekIndex) => {
-                        let backgroundColor = "white"; // Default background color
-                        let fontColor_wk = "";
-                        const Period4Chars =
-                          productData.pfd_period_no.slice(-4);
-                        const Week4Chars = week.slice(-4);
-
-                        if (weekIndex === 12) {
-                          backgroundColor = "#CEE6F3";
-                          fontColor_wk = "#0E21A0";
-                        } else if (Period4Chars === Week4Chars) {
-                          backgroundColor = "#B9B4C7"; // Set background color to your desired color if weekIndex is 12
-                        }
-
-                        const totalRows = Object.values(dataByProduct).length;
-                        // let previousResult = 0;
-                        let qtyFc =
-                          productData.qty_fc[week] !== undefined
-                            ? productData.qty_fc[week]
-                            : 0;
-                        // let result = productData.qty_fc[week] !== undefined ? sumQtyBal - productData.qty_fc[week] : 0;
-                        if (index === totalRows - 1) {
-                          // Apply conditions only to the last row
-                          if (weekIndex === 12) {
-                            result_1 = result_1 - qtyFc;
-                            if (result_1 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_1 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-                          if (weekIndex === 13) {
-                            result_2 = result_1 - qtyFc;
-                            if (result_2 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_2 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 14) {
-                            result_3 = result_2 - qtyFc;
-                            if (result_3 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_3 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 15) {
-                            result_4 = result_3 - qtyFc;
-                            if (result_4 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_4 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 16) {
-                            result_5 = result_4 - qtyFc;
-                            if (result_5 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_5 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 17) {
-                            result_6 = result_5 - qtyFc;
-                            if (result_6 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_6 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 18) {
-                            result_7 = result_6 - qtyFc;
-                            if (result_7 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_7 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 19) {
-                            result_8 = result_7 - qtyFc;
-                            if (result_8 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_8 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 20) {
-                            result_9 = result_8 - qtyFc;
-                            if (result_9 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_9 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 21) {
-                            result_10 = result_9 - qtyFc;
-                            if (result_10 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_10 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-
-                          if (weekIndex === 22) {
-                            result_11 = result_10 - qtyFc;
-                            if (result_11 >= 0) {
-                              backgroundColor = "#A6FF96";
-                            } else if (result_11 < 0) {
-                              backgroundColor = "#EF9595";
-                            }
-                          }
-                        }
-
+                        const fcLatestDataValue = fcLatest[week];
                         return (
                           <td
                             key={weekIndex}
                             style={{
                               textAlign: "center",
-                              backgroundColor: backgroundColor,
-                              color: fontColor_wk,
-                              height: "30px",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
                             }}
                           >
-                            {productData.qty_fc[week] !== undefined
-                              ? formatNumberWithCommas(productData.qty_fc[week])
+                            {fcLatestDataValue !== undefined
+                              ? formatNumberWithCommas(fcLatestDataValue)
+                              : "0"}
+                            {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#AED2FF",
+                          height: "30px",
+                        }}
+                      >
+                        FC_Fluctuation :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        const FlatValue = fcFlatData[week];
+                        const isNegative =
+                          FlatValue && FlatValue.charAt(0) === "-";
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: "#AED2FF",
+                              color: isNegative
+                                ? "red"
+                                : weekIndex === 12
+                                ? "#0E21A0"
+                                : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                            }}
+                          >
+                            {FlatValue !== undefined
+                              ? formatNumberWithCommas(FlatValue)
                               : "0"}
                           </td>
                         );
                       })}
                     </tr>
-                  ))}
-                  <tr>
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      FC_Latest :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const fcLatestDataValue = fcLatest[week];
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            textAlign: "center",
-                            backgroundColor: "#E4F1FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                          }}
-                        >
-                          {fcLatestDataValue !== undefined
-                            ? formatNumberWithCommas(fcLatestDataValue)
-                            : "0"}
-                          {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#AED2FF",
-                        height: "30px",
-                      }}
-                    >
-                      FC_Fluctuation :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const FlatValue = fcFlatData[week];
-                      const isNegative =
-                        FlatValue && FlatValue.charAt(0) === "-";
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            textAlign: "center",
-                            backgroundColor: "#AED2FF",
-                            color: isNegative
-                              ? "red"
-                              : weekIndex === 12
-                              ? "#0E21A0"
-                              : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                          }}
-                        >
-                          {FlatValue !== undefined
-                            ? formatNumberWithCommas(FlatValue)
-                            : "0"}
-                        </td>
-                      );
-                    })}
-                  </tr>
 
-                  <tr>
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      FC_Accuracy(%) :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const fcAccuracyValue = fcAccuracy[week];
-                      const fcAccuracyValues =
-                        fcAccuracyValue !== undefined
-                          ? parseInt(fcAccuracyValue)
-                          : "-";
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            textAlign: "center",
-                            backgroundColor: "#E4F1FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                          }}
-                        >
-                          {/* {fcAccuracyValues !== undefined ? formatNumberWithCommas(fcAccuracyValues) + "" : "-"} */}
-                          {fcAccuracyValues !== undefined
-                            ? `${formatNumberWithCommas(fcAccuracyValues)}${
-                                fcAccuracyValues > 0 ? " %" : ""
-                              }`
-                            : "-"}
-
-                          {/* {fcAccuracyValues !== undefined ? `${formatNumberWithCommas(fcAccuracyValues)} %` : "0 %"} */}
-                          {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#AED2FF",
-                        height: "30px",
-                      }}
-                    >
-                      PO_REC :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const recValue = po_rec[week];
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            textAlign: "center",
-                            backgroundColor: "#AED2FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                          }}
-                        >
-                          {recValue !== undefined
-                            ? formatNumberWithCommas(recValue)
-                            : "0"}
-                          {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      PO_DUE :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const dueValue = po_due[week];
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            textAlign: "center",
-                            backgroundColor: "#E4F1FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                          }}
-                        >
-                          {dueValue !== undefined
-                            ? formatNumberWithCommas(dueValue)
-                            : "0"}
-                          {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#AED2FF",
-                        height: "30px",
-                      }}
-                    >
-                      Actual ship :
-                    </td>
-                    {wk_no.map((week, weekIndex) => (
+                    <tr>
                       <td
-                        key={weekIndex}
                         style={{
-                          textAlign: "center",
-                          backgroundColor: "#AED2FF",
-                          color: weekIndex === 12 ? "#0E21A0" : "black",
-                          fontWeight: weekIndex === 12 ? "bold" : "normal",
-                        }}
-                      >
-                        {actualShips[week] !== undefined
-                          ? formatNumberWithCommas(actualShips[week])
-                          : "0"}
-                      </td>
-                    ))}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      PO_BAL :
-                    </td>
-                    {wk_no.map((week, weekIndex) => (
-                      <td
-                        key={weekIndex}
-                        style={{
-                          cursor:
-                            weekIndex === 12 && sumQtyBal > 0
-                              ? "pointer"
-                              : "default",
-                          textDecoration:
-                            weekIndex === 12 && sumQtyBal > 0
-                              ? "underline"
-                              : "none",
-                          textAlign: "center",
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
                           backgroundColor: "#E4F1FF",
-                          color: weekIndex === 12 ? "#0E21A0" : "black",
-                          fontWeight: weekIndex === 12 ? "bold" : "normal",
-                          fontSize: weekIndex === 12 ? "12px" : "normal",
+                          height: "30px",
                         }}
-                        // onClick={() => openModal_PoBalDetails(sumQtyBal)}
-                        onClick={() => {
-                          if (weekIndex === 12 && sumQtyBal > 0) {
-                            openModal_PoBalDetails(sumQtyBal);
-                          }
-                        }} // Open modal on click
                       >
-                        {/* {poBalData[week] !== undefined ? formatNumberWithCommas(poBalData[week]) : "0"} */}
-                        {weekIndex === 12
-                          ? formatNumberWithCommas(sumQtyBal)
-                          : "0"}
+                        FC_Accuracy(%) :
                       </td>
-                    ))}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      FG :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const FgValue = Fg[week];
-                      return (
+                      {wk_no.map((week, weekIndex) => {
+                        const fcAccuracyValue = fcAccuracy[week];
+                        const fcAccuracyValues =
+                          fcAccuracyValue !== undefined
+                            ? parseInt(fcAccuracyValue)
+                            : "-";
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                            }}
+                          >
+                            {/* {fcAccuracyValues !== undefined ? formatNumberWithCommas(fcAccuracyValues) + "" : "-"} */}
+                            {fcAccuracyValues !== undefined
+                              ? `${formatNumberWithCommas(fcAccuracyValues)}${
+                                  fcAccuracyValues > 0 ? " %" : ""
+                                }`
+                              : "-"}
+
+                            {/* {fcAccuracyValues !== undefined ? `${formatNumberWithCommas(fcAccuracyValues)} %` : "0 %"} */}
+                            {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
+                          </td>
+                        );
+                      })}
+                    </tr>
+
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#AED2FF",
+                          height: "30px",
+                        }}
+                      >
+                        PO_REC :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        const recValue = po_rec[week];
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: "#AED2FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                            }}
+                          >
+                            {recValue !== undefined
+                              ? formatNumberWithCommas(recValue)
+                              : "0"}
+                            {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        PO_DUE :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        const dueValue = po_due[week];
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              textAlign: "center",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                            }}
+                          >
+                            {dueValue !== undefined
+                              ? formatNumberWithCommas(dueValue)
+                              : "0"}
+                            {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#AED2FF",
+                          height: "30px",
+                        }}
+                      >
+                        Actual ship :
+                      </td>
+                      {wk_no.map((week, weekIndex) => (
+                        <td
+                          key={weekIndex}
+                          style={{
+                            textAlign: "center",
+                            backgroundColor: "#AED2FF",
+                            color: weekIndex === 12 ? "#0E21A0" : "black",
+                            fontWeight: weekIndex === 12 ? "bold" : "normal",
+                          }}
+                        >
+                          {actualShips[week] !== undefined
+                            ? formatNumberWithCommas(actualShips[week])
+                            : "0"}
+                        </td>
+                      ))}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        PO_BAL :
+                      </td>
+                      {wk_no.map((week, weekIndex) => (
                         <td
                           key={weekIndex}
                           style={{
                             cursor:
-                              weekIndex === 12 && sumQtyFg > 0
+                              weekIndex === 12 && sumQtyBal > 0
                                 ? "pointer"
                                 : "default",
                             textDecoration:
-                              weekIndex === 12 && sumQtyFg > 0
+                              weekIndex === 12 && sumQtyBal > 0
                                 ? "underline"
                                 : "none",
                             textAlign: "center",
@@ -1394,497 +1353,547 @@ export default function Planning_Forecast_POPage({ onSearch }) {
                             fontWeight: weekIndex === 12 ? "bold" : "normal",
                             fontSize: weekIndex === 12 ? "12px" : "normal",
                           }}
-                          // onClick={() => openModal_FGDetails(sumQtyFg)}
+                          // onClick={() => openModal_PoBalDetails(sumQtyBal)}
                           onClick={() => {
-                            if (weekIndex === 12 && sumQtyFg > 0) {
-                              openModal_FGDetails(sumQtyFg);
+                            if (weekIndex === 12 && sumQtyBal > 0) {
+                              openModal_PoBalDetails(sumQtyBal);
                             }
                           }} // Open modal on click
                         >
+                          {/* {poBalData[week] !== undefined ? formatNumberWithCommas(poBalData[week]) : "0"} */}
                           {weekIndex === 12
-                            ? formatNumberWithCommas(sumQtyFg)
-                            : "0"}
-                          {/* {FgValue !== undefined ? formatNumberWithCommas(FgValue) : "0"} */}
-                          {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      FG Unmovement :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const FgUnmovementValue = FgUnmovement[week];
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            cursor:
-                              weekIndex === 12 && FgUnmovement[week] > 0
-                                ? "pointer"
-                                : "default",
-                            textDecoration:
-                              weekIndex === 12 && FgUnmovement[week] > 0
-                                ? "underline"
-                                : "none",
-                            textAlign: "center",
-                            backgroundColor: "#E4F1FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                            fontSize: weekIndex === 12 ? "12px" : "normal",
-                          }}
-                          // onClick={() => openModal_FGunDetails(FgUnmovement[week])}
-                          onClick={() => {
-                            if (weekIndex === 12 && FgUnmovement[week] > 0) {
-                              openModal_FGunDetails(FgUnmovement[week]);
-                            }
-                          }} // Open modal on click
-                        >
-                          {FgUnmovementValue !== undefined
-                            ? formatNumberWithCommas(FgUnmovementValue)
-                            : "0"}
-                          {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      WIP :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      const WipValue = wip[week];
-                      return (
-                        <td
-                          key={weekIndex}
-                          style={{
-                            cursor:
-                              weekIndex === 12 && sumQtyWip > 0
-                                ? "pointer"
-                                : "default",
-                            textDecoration:
-                              weekIndex === 12 && sumQtyWip > 0
-                                ? "underline"
-                                : "none",
-                            textAlign: "center",
-                            backgroundColor: "#E4F1FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                            fontSize: weekIndex === 12 ? "12px" : "normal",
-                          }}
-                          // onClick={() => openModal_WipDetails(sumQtyWip)}
-                          onClick={() => {
-                            if (weekIndex === 12 && sumQtyWip > 0) {
-                              openModal_WipDetails(sumQtyWip);
-                            }
-                          }} // Open modal on click
-                        >
-                          {weekIndex === 12
-                            ? formatNumberWithCommas(sumQtyWip)
+                            ? formatNumberWithCommas(sumQtyBal)
                             : "0"}
                         </td>
-                      );
-                    })}
-                  </tr>
-                  <tr>
-                    {/* <td></td> */}
-                    <td
-                      style={{
-                        color: "blue",
-                        fontWeight: "bold",
-                        textAlign: "right",
-                        backgroundColor: "#E4F1FF",
-                        height: "30px",
-                      }}
-                    >
-                      WIP Pending (1.1,3.1) :
-                    </td>
-                    {wk_no.map((week, weekIndex) => {
-                      return (
-                        <th
-                          key={weekIndex}
-                          style={{
-                            cursor:
-                              weekIndex === 12 &&
-                              wipPending &&
-                              wipPending.length > 0
-                                ? "pointer"
-                                : "default",
-                            textDecoration:
-                              weekIndex === 12 &&
-                              wipPending &&
-                              wipPending.length > 0
-                                ? "underline"
-                                : "none",
-                            textAlign: "center",
-                            backgroundColor: "#E4F1FF",
-                            color: weekIndex === 12 ? "#0E21A0" : "black",
-                            fontWeight: weekIndex === 12 ? "bold" : "normal",
-                            fontSize: weekIndex === 12 ? "12px" : "normal",
-                          }}
-                          // onClick={() => openModal_WipPenDetails(wipPending.length)}
-                          onClick={() => {
-                            if (weekIndex === 12 && wipPending.length > 0) {
-                              openModal_WipPenDetails(wipPending.length);
-                            }
-                          }} // Open modal on click
-                        >
-                          {wipPending &&
-                          wipPending.length > 0 &&
-                          weekIndex === 12
-                            ? formatNumberWithCommas(wipPending[0].qty_pending)
-                            : "0"}
-                        </th>
-                      );
-                    })}
-                  </tr>
-                </tbody>
-              </table>
-            )}
+                      ))}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        FG :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        const FgValue = Fg[week];
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              cursor:
+                                weekIndex === 12 && sumQtyFg > 0
+                                  ? "pointer"
+                                  : "default",
+                              textDecoration:
+                                weekIndex === 12 && sumQtyFg > 0
+                                  ? "underline"
+                                  : "none",
+                              textAlign: "center",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                              fontSize: weekIndex === 12 ? "12px" : "normal",
+                            }}
+                            // onClick={() => openModal_FGDetails(sumQtyFg)}
+                            onClick={() => {
+                              if (weekIndex === 12 && sumQtyFg > 0) {
+                                openModal_FGDetails(sumQtyFg);
+                              }
+                            }} // Open modal on click
+                          >
+                            {weekIndex === 12
+                              ? formatNumberWithCommas(sumQtyFg)
+                              : "0"}
+                            {/* {FgValue !== undefined ? formatNumberWithCommas(FgValue) : "0"} */}
+                            {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        FG Unmovement :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        const FgUnmovementValue = FgUnmovement[week];
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              cursor:
+                                weekIndex === 12 && FgUnmovement[week] > 0
+                                  ? "pointer"
+                                  : "default",
+                              textDecoration:
+                                weekIndex === 12 && FgUnmovement[week] > 0
+                                  ? "underline"
+                                  : "none",
+                              textAlign: "center",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                              fontSize: weekIndex === 12 ? "12px" : "normal",
+                            }}
+                            // onClick={() => openModal_FGunDetails(FgUnmovement[week])}
+                            onClick={() => {
+                              if (weekIndex === 12 && FgUnmovement[week] > 0) {
+                                openModal_FGunDetails(FgUnmovement[week]);
+                              }
+                            }} // Open modal on click
+                          >
+                            {FgUnmovementValue !== undefined
+                              ? formatNumberWithCommas(FgUnmovementValue)
+                              : "0"}
+                            {/* {recValue !== undefined ? (recValue !== 0 ? recValue : "--") : "--"} */}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        WIP :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        const WipValue = wip[week];
+                        return (
+                          <td
+                            key={weekIndex}
+                            style={{
+                              cursor:
+                                weekIndex === 12 && sumQtyWip > 0
+                                  ? "pointer"
+                                  : "default",
+                              textDecoration:
+                                weekIndex === 12 && sumQtyWip > 0
+                                  ? "underline"
+                                  : "none",
+                              textAlign: "center",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                              fontSize: weekIndex === 12 ? "12px" : "normal",
+                            }}
+                            // onClick={() => openModal_WipDetails(sumQtyWip)}
+                            onClick={() => {
+                              if (weekIndex === 12 && sumQtyWip > 0) {
+                                openModal_WipDetails(sumQtyWip);
+                              }
+                            }} // Open modal on click
+                          >
+                            {weekIndex === 12
+                              ? formatNumberWithCommas(sumQtyWip)
+                              : "0"}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      {/* <td></td> */}
+                      <td
+                        style={{
+                          color: "blue",
+                          fontWeight: "bold",
+                          textAlign: "right",
+                          backgroundColor: "#E4F1FF",
+                          height: "30px",
+                        }}
+                      >
+                        WIP Pending (1.1,3.1) :
+                      </td>
+                      {wk_no.map((week, weekIndex) => {
+                        return (
+                          <th
+                            key={weekIndex}
+                            style={{
+                              cursor:
+                                weekIndex === 12 &&
+                                wipPending &&
+                                wipPending.length > 0
+                                  ? "pointer"
+                                  : "default",
+                              textDecoration:
+                                weekIndex === 12 &&
+                                wipPending &&
+                                wipPending.length > 0
+                                  ? "underline"
+                                  : "none",
+                              textAlign: "center",
+                              backgroundColor: "#E4F1FF",
+                              color: weekIndex === 12 ? "#0E21A0" : "black",
+                              fontWeight: weekIndex === 12 ? "bold" : "normal",
+                              fontSize: weekIndex === 12 ? "12px" : "normal",
+                            }}
+                            // onClick={() => openModal_WipPenDetails(wipPending.length)}
+                            onClick={() => {
+                              if (weekIndex === 12 && wipPending.length > 0) {
+                                openModal_WipPenDetails(wipPending.length);
+                              }
+                            }} // Open modal on click
+                          >
+                            {wipPending &&
+                            wipPending.length > 0 &&
+                            weekIndex === 12
+                              ? formatNumberWithCommas(
+                                  wipPending[0].qty_pending
+                                )
+                              : "0"}
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  </tbody>
+                </table>
+              )}
 
-            {/* Modal */}
-            {isModalOpen_PODet && (
-              <Modal
-                open={isModalOpen_PODet}
-                onClose={closeModal_PoBalDetails}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-              >
-                <Box
-                  sx={{
-                    ...style_Modal,
-                    width: 1325,
-                    height: 800,
-                    backgroundColor: "#AED2FF",
-                  }}
+              {/* Modal */}
+              {isModalOpen_PODet && (
+                <Modal
+                  open={isModalOpen_PODet}
+                  onClose={closeModal_PoBalDetails}
+                  aria-labelledby="child-modal-title"
+                  aria-describedby="child-modal-description"
                 >
-                  {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "10px",
+                  <Box
+                    sx={{
+                      ...style_Modal,
+                      width: 1325,
+                      height: 800,
+                      backgroundColor: "#AED2FF",
                     }}
                   >
+                    {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
                     <div
                       style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        marginBottom: "10px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "10px",
                       }}
                     >
-                      <label htmlFor="">PO Balance by Details</label>
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <label htmlFor="">PO Balance by Details</label>
+                      </div>
+                      <div>
+                        <IconButton onClick={closeModal_PoBalDetails}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
                     </div>
-                    <div>
-                      <IconButton onClick={closeModal_PoBalDetails}>
-                        <CloseIcon />
-                      </IconButton>
+                    <div style={{ height: 680, width: "100%" }}>
+                      <DataGrid
+                        // rows={poBalDetails}
+                        rows={poBalDetails.map((row) => ({
+                          ...row,
+                          qty_bal: formatNumberWithCommas(row.qty_bal), // Format the qty_pending field
+                        }))}
+                        columns={columns_PoBalDetails}
+                        loading={!poBalDetails.length}
+                        pageSize={10}
+                        checkboxSelection
+                        // autoPageSize
+                        style={{
+                          minHeight: "400px",
+                          border: "1px solid black",
+                          backgroundColor: "#E4F1FF",
+                        }}
+                        slots={{ toolbar: CustomToolbar }}
+                      />
                     </div>
-                  </div>
-                  <div style={{ height: 680, width: "100%" }}>
-                    <DataGrid
-                      // rows={poBalDetails}
-                      rows={poBalDetails.map((row) => ({
-                        ...row,
-                        qty_bal: formatNumberWithCommas(row.qty_bal), // Format the qty_pending field
-                      }))}
-                      columns={columns_PoBalDetails}
-                      loading={!poBalDetails.length}
-                      pageSize={10}
-                      checkboxSelection
-                      // autoPageSize
-                      style={{
-                        minHeight: "400px",
-                        border: "1px solid black",
-                        backgroundColor: "#E4F1FF",
-                      }}
-                      slots={{ toolbar: CustomToolbar }}
-                    />
-                  </div>
-                </Box>
-              </Modal>
-            )}
+                  </Box>
+                </Modal>
+              )}
 
-            {isModalOpen_FGDet && (
-              <Modal
-                open={isModalOpen_FGDet}
-                onClose={closeModal_FGDetails}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-              >
-                <Box
-                  sx={{
-                    ...style_Modal,
-                    width: 1120,
-                    height: 800,
-                    backgroundColor: "#AED2FF",
-                  }}
+              {isModalOpen_FGDet && (
+                <Modal
+                  open={isModalOpen_FGDet}
+                  onClose={closeModal_FGDetails}
+                  aria-labelledby="child-modal-title"
+                  aria-describedby="child-modal-description"
                 >
-                  {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "10px",
+                  <Box
+                    sx={{
+                      ...style_Modal,
+                      width: 1120,
+                      height: 800,
+                      backgroundColor: "#AED2FF",
                     }}
                   >
+                    {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
                     <div
                       style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        marginBottom: "10px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "10px",
                       }}
                     >
-                      <label htmlFor="">FG by Details</label>
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <label htmlFor="">FG by Details</label>
+                      </div>
+                      <div>
+                        <IconButton onClick={closeModal_FGDetails}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
                     </div>
-                    <div>
-                      <IconButton onClick={closeModal_FGDetails}>
-                        <CloseIcon />
-                      </IconButton>
+                    <div style={{ height: 680, width: "100%" }}>
+                      <DataGrid
+                        // rows={FGDetails}
+                        rows={FGDetails.map((row) => ({
+                          ...row,
+                          qty_good: formatNumberWithCommas(row.qty_good), // Format the qty_pending field
+                        }))}
+                        columns={columns_FGDetails}
+                        // loading={!FGDetails.length}
+                        pageSize={10}
+                        checkboxSelection
+                        // autoPageSize
+                        style={{
+                          minHeight: "400px",
+                          border: "1px solid black",
+                          backgroundColor: "#E4F1FF",
+                        }}
+                        slots={{ toolbar: CustomToolbar }}
+                      />
                     </div>
-                  </div>
-                  <div style={{ height: 680, width: "100%" }}>
-                    <DataGrid
-                      // rows={FGDetails}
-                      rows={FGDetails.map((row) => ({
-                        ...row,
-                        qty_good: formatNumberWithCommas(row.qty_good), // Format the qty_pending field
-                      }))}
-                      columns={columns_FGDetails}
-                      // loading={!FGDetails.length}
-                      pageSize={10}
-                      checkboxSelection
-                      // autoPageSize
-                      style={{
-                        minHeight: "400px",
-                        border: "1px solid black",
-                        backgroundColor: "#E4F1FF",
-                      }}
-                      slots={{ toolbar: CustomToolbar }}
-                    />
-                  </div>
-                </Box>
-              </Modal>
-            )}
+                  </Box>
+                </Modal>
+              )}
 
-            {isModalOpen_FGunDet && (
-              <Modal
-                open={isModalOpen_FGunDet}
-                onClose={closeModal_FGunDetails}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-              >
-                <Box
-                  sx={{
-                    ...style_Modal,
-                    width: 1120,
-                    height: 800,
-                    backgroundColor: "#AED2FF",
-                  }}
+              {isModalOpen_FGunDet && (
+                <Modal
+                  open={isModalOpen_FGunDet}
+                  onClose={closeModal_FGunDetails}
+                  aria-labelledby="child-modal-title"
+                  aria-describedby="child-modal-description"
                 >
-                  {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "10px",
+                  <Box
+                    sx={{
+                      ...style_Modal,
+                      width: 1120,
+                      height: 800,
+                      backgroundColor: "#AED2FF",
                     }}
                   >
+                    {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
                     <div
                       style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        marginBottom: "10px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "10px",
                       }}
                     >
-                      <label htmlFor="">FG Unmovement by Details</label>
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <label htmlFor="">FG Unmovement by Details</label>
+                      </div>
+                      <div>
+                        <IconButton onClick={closeModal_FGunDetails}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
                     </div>
-                    <div>
-                      <IconButton onClick={closeModal_FGunDetails}>
-                        <CloseIcon />
-                      </IconButton>
+                    <div style={{ height: 680, width: "100%" }}>
+                      <DataGrid
+                        // rows={FGunDetails}
+                        rows={FGunDetails.map((row) => ({
+                          ...row,
+                          qty_hold: formatNumberWithCommas(row.qty_hold), // Format the qty_pending field
+                        }))}
+                        columns={columns_FGunDetails}
+                        // loading={!FGDetails.length}
+                        pageSize={10}
+                        checkboxSelection
+                        // autoPageSize
+                        style={{
+                          minHeight: "400px",
+                          border: "1px solid black",
+                          backgroundColor: "#E4F1FF",
+                        }}
+                        slots={{ toolbar: CustomToolbar }}
+                      />
                     </div>
-                  </div>
-                  <div style={{ height: 680, width: "100%" }}>
-                    <DataGrid
-                      // rows={FGunDetails}
-                      rows={FGunDetails.map((row) => ({
-                        ...row,
-                        qty_hold: formatNumberWithCommas(row.qty_hold), // Format the qty_pending field
-                      }))}
-                      columns={columns_FGunDetails}
-                      // loading={!FGDetails.length}
-                      pageSize={10}
-                      checkboxSelection
-                      // autoPageSize
-                      style={{
-                        minHeight: "400px",
-                        border: "1px solid black",
-                        backgroundColor: "#E4F1FF",
-                      }}
-                      slots={{ toolbar: CustomToolbar }}
-                    />
-                  </div>
-                </Box>
-              </Modal>
-            )}
+                  </Box>
+                </Modal>
+              )}
 
-            {isModalOpen_WipDet && (
-              <Modal
-                open={isModalOpen_WipDet}
-                onClose={closeModal_WipDetails}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-              >
-                <Box
-                  sx={{
-                    ...style_Modal,
-                    width: 1500,
-                    height: 800,
-                    backgroundColor: "#AED2FF",
-                  }}
+              {isModalOpen_WipDet && (
+                <Modal
+                  open={isModalOpen_WipDet}
+                  onClose={closeModal_WipDetails}
+                  aria-labelledby="child-modal-title"
+                  aria-describedby="child-modal-description"
                 >
-                  {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "10px",
+                  <Box
+                    sx={{
+                      ...style_Modal,
+                      width: 1500,
+                      height: 800,
+                      backgroundColor: "#AED2FF",
                     }}
                   >
+                    {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
                     <div
                       style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        marginBottom: "10px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "10px",
                       }}
                     >
-                      <label htmlFor="">WIP by Details</label>
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <label htmlFor="">WIP by Details</label>
+                      </div>
+                      <div>
+                        <IconButton onClick={closeModal_WipDetails}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
                     </div>
-                    <div>
-                      <IconButton onClick={closeModal_WipDetails}>
-                        <CloseIcon />
-                      </IconButton>
+                    <div style={{ height: 680, width: "100%" }}>
+                      <DataGrid
+                        // rows={WipDetails}
+                        rows={WipDetails.map((row) => ({
+                          ...row,
+                          qty_wip_detail: formatNumberWithCommas(
+                            row.qty_wip_detail
+                          ), // Format the qty_pending field
+                        }))}
+                        columns={columns_WipDetails}
+                        // loading={!FGDetails.length}
+                        pageSize={10}
+                        checkboxSelection
+                        // autoPageSize
+                        style={{
+                          minHeight: "400px",
+                          border: "1px solid black",
+                          backgroundColor: "#E4F1FF",
+                        }}
+                        slots={{ toolbar: CustomToolbar }}
+                      />
                     </div>
-                  </div>
-                  <div style={{ height: 680, width: "100%" }}>
-                    <DataGrid
-                      // rows={WipDetails}
-                      rows={WipDetails.map((row) => ({
-                        ...row,
-                        qty_wip_detail: formatNumberWithCommas(
-                          row.qty_wip_detail
-                        ), // Format the qty_pending field
-                      }))}
-                      columns={columns_WipDetails}
-                      // loading={!FGDetails.length}
-                      pageSize={10}
-                      checkboxSelection
-                      // autoPageSize
-                      style={{
-                        minHeight: "400px",
-                        border: "1px solid black",
-                        backgroundColor: "#E4F1FF",
-                      }}
-                      slots={{ toolbar: CustomToolbar }}
-                    />
-                  </div>
-                </Box>
-              </Modal>
-            )}
+                  </Box>
+                </Modal>
+              )}
 
-            {isModalOpen_WipPenDet && (
-              <Modal
-                open={isModalOpen_WipPenDet}
-                onClose={closeModal_WipPenDetails}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-              >
-                <Box
-                  sx={{
-                    ...style_Modal,
-                    width: 1330,
-                    height: 800,
-                    backgroundColor: "#AED2FF",
-                  }}
+              {isModalOpen_WipPenDet && (
+                <Modal
+                  open={isModalOpen_WipPenDet}
+                  onClose={closeModal_WipPenDetails}
+                  aria-labelledby="child-modal-title"
+                  aria-describedby="child-modal-description"
                 >
-                  {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "10px",
+                  <Box
+                    sx={{
+                      ...style_Modal,
+                      width: 1330,
+                      height: 800,
+                      backgroundColor: "#AED2FF",
                     }}
                   >
+                    {/* <h3 style={{textAlign: 'center'}}>PO Balance by Details</h3> */}
                     <div
                       style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                        marginBottom: "10px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "10px",
                       }}
                     >
-                      <label htmlFor="">WIP Pending by Details</label>
+                      <div
+                        style={{
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: "20px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <label htmlFor="">WIP Pending by Details</label>
+                      </div>
+                      <div>
+                        <IconButton onClick={closeModal_WipPenDetails}>
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
                     </div>
-                    <div>
-                      <IconButton onClick={closeModal_WipPenDetails}>
-                        <CloseIcon />
-                      </IconButton>
+                    <div style={{ height: 680, width: "100%" }}>
+                      <DataGrid
+                        // rows={WipPenDetails}
+                        rows={WipPenDetails.map((row) => ({
+                          ...row,
+                          qty_pending: formatNumberWithCommas(row.qty_pending), // Format the qty_pending field
+                        }))}
+                        columns={columns_WipPenDetails}
+                        // loading={!FGDetails.length}
+                        pageSize={10}
+                        checkboxSelection
+                        // autoPageSize
+                        style={{
+                          minHeight: "400px",
+                          border: "1px solid black",
+                          backgroundColor: "#E4F1FF",
+                        }}
+                        slots={{ toolbar: CustomToolbar }}
+                      />
                     </div>
-                  </div>
-                  <div style={{ height: 680, width: "100%" }}>
-                    <DataGrid
-                      // rows={WipPenDetails}
-                      rows={WipPenDetails.map((row) => ({
-                        ...row,
-                        qty_pending: formatNumberWithCommas(row.qty_pending), // Format the qty_pending field
-                      }))}
-                      columns={columns_WipPenDetails}
-                      // loading={!FGDetails.length}
-                      pageSize={10}
-                      checkboxSelection
-                      // autoPageSize
-                      style={{
-                        minHeight: "400px",
-                        border: "1px solid black",
-                        backgroundColor: "#E4F1FF",
-                      }}
-                      slots={{ toolbar: CustomToolbar }}
-                    />
-                  </div>
-                </Box>
-              </Modal>
-            )}
-          </div>
-        </Box>
+                  </Box>
+                </Modal>
+              )}
+            </div>
+          </Box>
+        </Container>
       </div>
     </>
   );

@@ -74,13 +74,14 @@ function Login() {
   return (
     <>
       <div className="login-container">
+        <p className="login-title">Smart Planning</p>
         <img
           src={Fuji}
           alt="fuji"
           className="login-logo"
           style={{
-            width: 360,
-            margin: 40,
+            width: 90,
+            margin: 10,
           }}
         />
         <form onSubmit={handleLogin}>

@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 //count usage function
-import countUsage from "../catchCount/CountUsage.jsx";
+import countUsagedPO from "../catchCount/CountUsagePO.jsx";
 
 function SearchFacSeriesProd_Fc({ onSearch }) {
   const [error, setError] = useState(null);
@@ -79,15 +79,6 @@ function SearchFacSeriesProd_Fc({ onSearch }) {
     fetchProduct();
     fetchSeries();
   }, [selectedProduct, selectedSeries]);
-
-  const handleCount = () => {
-    // axios
-    //   .post("http://localhost:8080/api/count", { count: 1 })
-    //   .then((res) => console.log(res.data))
-    //   .catch((err) => console.log(err));
-
-    console.log("counted");
-  };
 
   return (
     <React.Fragment>
@@ -190,7 +181,7 @@ function SearchFacSeriesProd_Fc({ onSearch }) {
                 marginTop: "2px",
                 marginLeft: "25px",
               }}
-              onClick={(handleSearch, countUsage)}
+              onClick={(handleSearch, countUsagedPO)}
             >
               Search
             </Button>
