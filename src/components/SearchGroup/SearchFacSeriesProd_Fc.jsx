@@ -181,7 +181,10 @@ function SearchFacSeriesProd_Fc({ onSearch }) {
                 marginTop: "2px",
                 marginLeft: "25px",
               }}
-              onClick={(handleSearch, countUsagedPO)}
+              onClick={() => {
+                handleSearch();
+                countUsagedPO();
+              }}
             >
               Search
             </Button>

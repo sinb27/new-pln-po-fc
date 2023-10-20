@@ -859,8 +859,8 @@ export default function Planning_Forecast_POPage({ onSearch }) {
             </div>
 
             <div
-              className="table-responsive table-fullscreen"
-              style={{ height: 800, width: "100%", marginTop: "5px" }}
+              className="table-responsive_table-fullscreen"
+              // style={{ height: 800, width: "100%", marginTop: "5px" }}
             >
               {isLoading ? ( // Render the loading indicator if isLoading is true
                 <div

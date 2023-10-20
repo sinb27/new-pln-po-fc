@@ -3,7 +3,7 @@
   position: absolute;
   top: 3rem;
   left: 5rem;
-  /* max-width: 1440px; */
+  /* width: 1440px; */
   margin-right: 3rem;
   height: auto;
   display: flex;
@@ -11,9 +11,17 @@
   color: black;
 }
 
+.table-responsive_table-fullscreen {
+  width: max-content;
+  margin: 1rem 0;
+}
+
 @media screen and (max-width: 1440px) {
   .po-container {
     width: 1280px;
+  }
+  .table-responsive_table-fullscreen {
+    width: fit-content;
   }
 }
 
